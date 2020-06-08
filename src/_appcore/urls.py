@@ -5,10 +5,12 @@ from django.views.generic.base import RedirectView
 from rest_framework import routers
 
 from accounts.views import UserViewSet
+from companies.views import CompanyViewset
 
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet, basename='users')
+router.register(r'companies', CompanyViewset, basename='companies')
 
 
 urlpatterns = [

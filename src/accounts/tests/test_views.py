@@ -4,14 +4,6 @@ from rest_framework.reverse import reverse
 
 
 @pytest.mark.django_db
-def test_user_created_signal(django_user_model):
-    user1 = django_user_model.objects.create(username='user1')
-    assert hasattr(user1, 'auth_token')
-
-    user1.save()  # just for 100% coverage
-
-
-@pytest.mark.django_db
 def test_users_list(client, django_user_model):
     django_user_model.objects.create(username='user1')
     response = client.get(reverse('users-list'))
