@@ -30,7 +30,7 @@ Any user (anonymous included) can list or retrieve companies and list or create 
 
 `GET /api/companies/`
 
-For list companies just make an HTTP GET request to the companies endpoint:
+To list companies just make an HTTP GET request to the companies endpoint:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/companies/
@@ -54,7 +54,7 @@ $ curl -X GET http://127.0.0.1:8000/api/companies/
 
 `GET /api/companies/{id}/`
 
-For retrieving a company object, do a GET request to it's endpoint. Each company has an `id` field which should be passed on request. In the following example the `id` is `1`:
+To retrieving a company object, do a GET request to it's endpoint. Each company has an `id` field which should be passed on request. In the following example the `id` is `1`:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/companies/1/
@@ -75,7 +75,7 @@ $ curl -X GET http://127.0.0.1:8000/api/companies/1/
 
 `GET /api/users/`
 
-For list users just make an HTTP GET request to the user endpoint:
+To list users just make an HTTP GET request to the user endpoint:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/users/
@@ -99,7 +99,7 @@ $ curl -X GET http://127.0.0.1:8000/api/users/
 
 `POST /api/users/`
 
-For creating a new user you will need to send a `JSON` payload with the user's `username` like the example below:
+To creating a new user you will need to send a `JSON` payload with the user's `username` like the example below:
 
 ```console
 $ curl -X POST http://127.0.0.1:8000/api/users/ \
@@ -119,7 +119,7 @@ $ curl -X POST http://127.0.0.1:8000/api/users/ \
 
 `GET /api/users/{username}/`
 
-For retrieve an user just make an HTTP GET request to the user's endpoint:
+To retrieve an user just make an HTTP GET request to the user's endpoint:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/users/john/ \
@@ -142,7 +142,7 @@ $ curl -X GET http://127.0.0.1:8000/api/users/john/ \
 
 `GET /api/users/{username}/reviews/`
 
-For list reviews just make an HTTP GET request to the user's review endpoint:
+To list reviews just make an HTTP GET request to the user's review endpoint:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/users/mary/reviews/ \
@@ -195,7 +195,7 @@ $ curl -X GET http://127.0.0.1:8000/api/users/mary/reviews/ \
 
 `POST /api/users/{username}/reviews/`
 
-For creating a user's review you will need to send a `JSON` payload with the the following fields: `company_id`, `title`, `summary` and `rating` as shown below:
+To creating a user's review you will need to send a `JSON` payload with the following fields: `company_id`, `title`, `summary` and `rating` as shown below:
 
 ```console
 $ curl -X POST http://127.0.0.1:8000/api/users/mary/reviews/ \
@@ -229,7 +229,7 @@ $ curl -X POST http://127.0.0.1:8000/api/users/mary/reviews/ \
 
 `GET /api/users/{username}/reviews/{id}`
 
-For retrieve an user's review just make an HTTP GET request to the user's review endpoint:
+To retrieve an user's review just make an HTTP GET request to the user's review endpoint:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/users/mary/reviews/12/ \

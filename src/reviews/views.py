@@ -28,7 +28,7 @@ class ReviewList(generics.ListCreateAPIView):
         try:
             company = Company.objects.get(id=request.data.get('company_id', 0))
         except Company.DoesNotExist:
-            raise exceptions.ValidationError('This company does not exist.')
+            raise exceptions.ValidationError('A company with that id do not exists.')
 
         reviewer = User.objects.get(username=self.kwargs['username'])
 
@@ -42,15 +42,13 @@ class ReviewList(generics.ListCreateAPIView):
         }
 
         serializer = ReviewLiteSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            review = serializer.save()
+        serializer.is_valid(raise_exception=True)
+        review = serializer.save()
 
-            data = ReviewSerializer(review, context={'request': request}).data
-            resp = response.Response(data)
-            resp.status_code = 201
-            return resp
-
-        raise exceptions.ValidationError('Invalid data')
+        data = ReviewSerializer(review, context={'request': request}).data
+        resp = response.Response(data)
+        resp.status_code = 201
+        return resp
 
 
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):

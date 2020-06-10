@@ -1,29 +1,35 @@
 import pytest
 
+from django import urls
+
 from rest_framework.reverse import reverse
 
 
+@pytest.mark.parametrize('view_name', ['go-to-api'])
+def test_redirect_from_root_to_api(view_name, client):
+    url = urls.reverse(view_name)
+    resp = client.get(url)
+    assert resp.status_code == 302
+
+
 @pytest.mark.django_db
-def test_users_list(client, django_user_model):
-    django_user_model.objects.create(username='user1')
+def test_listing_users(client, django_user_model):
+    django_user_model.objects.create(username='user')
     response = client.get(reverse('users-list'))
     assert 'api_token' not in response.data[0]
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
-def test_users_create(client):
-    response1 = client.post(reverse('users-list'), {'username': 'user1'})
-    assert 'api_token' in response1.data
-    assert response1.status_code == 201
-
-    response2 = client.post(reverse('users-list'), {'username': 'user1'})
-    assert 'api_token' not in response2.data
-    assert response2.status_code == 400
+@pytest.mark.parametrize('username, expected', [('user1', 201), ('user2', 400), ('user*', 400), ('!@#$', 400)])
+def test_creating_users(username, expected, client, django_user_model):
+    django_user_model.objects.create(username='user2')
+    response = client.post(reverse('users-list'), {'username': username})
+    assert response.status_code == expected
 
 
 @pytest.mark.django_db
-def test_users_retrieve(client, admin_user, django_user_model):
+def test_user_permissions_on_retrieving_users(client, admin_user, django_user_model):
     user1 = django_user_model.objects.create(username='user1')
     user2 = django_user_model.objects.create(username='user2')
 
