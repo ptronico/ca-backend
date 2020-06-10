@@ -17,7 +17,7 @@ def test_reviews_list(client, django_user_model):
     response = client.get(reverse('users-reviews-list', args=['user1']), HTTP_AUTHORIZATION=auth_token)
     assert response.status_code == 403
 
-    # Onwer
+    # Owner
     auth_token = 'Token %s' % user1.auth_token.key
     response = client.get(reverse('users-reviews-list', args=['user1']), HTTP_AUTHORIZATION=auth_token)
     assert response.status_code == 200
@@ -33,8 +33,15 @@ def test_reviews_create(client, django_user_model):
         'company_id': company.pk,
         'title': 'Good products!',
         'summary': '...',
-        'rating': 6,
+        'rating': 4,
         'ipv4': '127.0.0.1',
+    }
+
+    invalid_payload = {
+        'company_id': 2000,
+        'title': '',
+        'summary': '',
+        'rating': 6,
     }
 
     # Anon
@@ -46,13 +53,13 @@ def test_reviews_create(client, django_user_model):
     response = client.post(reverse('users-reviews-list', args=['user1']), payload, HTTP_AUTHORIZATION=auth_token)
     assert response.status_code == 403
 
-    # Onwer (invalid payload)
+    # Owner (invalid payload)
     auth_token = 'Token %s' % user1.auth_token.key
-    response = client.post(reverse('users-reviews-list', args=['user1']), payload, HTTP_AUTHORIZATION=auth_token)
+    response = client.post(reverse('users-reviews-list', args=['user1']),
+                           invalid_payload, HTTP_AUTHORIZATION=auth_token)
     assert response.status_code == 400
 
-    # Onwer
-    payload['rating'] = 5
+    # Owner
     auth_token = 'Token %s' % user1.auth_token.key
     response = client.post(reverse('users-reviews-list', args=['user1']), payload, HTTP_AUTHORIZATION=auth_token)
     assert response.status_code == 201

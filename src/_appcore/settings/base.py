@@ -93,3 +93,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+REST_FRAMEWORK_ALLOWED_METHODS = ['get', 'post', 'head', 'options']

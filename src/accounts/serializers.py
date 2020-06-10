@@ -1,6 +1,8 @@
-from rest_framework import serializers
-
 from django.contrib.auth.models import User
+from django.core.validators import validate_slug
+from django.core.exceptions import ValidationError
+
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,3 +23,13 @@ class UserLiteSerializer(UserSerializer):
     class Meta:
         model = User
         fields = ['username', 'url', 'reviews_url']
+
+    def validate_username(self, value):
+        """
+        Ensure `value` contains only letter, numbers, underscores or hyphens.
+        """
+        try:
+            validate_slug(value)
+        except ValidationError:
+            raise serializers.ValidationError('Username must have only letters, numbers, underscores or hyphens.')
+        return value

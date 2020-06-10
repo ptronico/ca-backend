@@ -12,8 +12,9 @@ class ReviewBaseSerializerMixin(object):
         """
         Ensure `value` is in 1-5 range.
         """
-        if value < 1 or value > 5:
-            raise serializers.ValidationError("Rating must be greater or equal to 1 or less or equal to 5.")
+        if value not in [1, 2, 3, 4, 5]:
+            raise serializers.ValidationError('The rating must be a integer greater or '
+                                              'equal to 1 or less or equal to 5.')
         return value
 
 

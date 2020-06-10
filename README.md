@@ -1,5 +1,9 @@
 # ca-backend
 
+[API-DOCS](API-DOCS.md) | [General assumptions and comments](Assumptions.md)
+
+----
+
 This backend software implements a simple REST API that allows users to post and retrieve their reviews. It was built with Django and Django REST Framework. The tests are powered by pytest framework.
 
 ----
