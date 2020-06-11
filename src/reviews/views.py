@@ -28,7 +28,7 @@ class ReviewList(generics.ListCreateAPIView):
         try:
             company = Company.objects.get(id=request.data.get('company_id', 0))
         except Company.DoesNotExist:
-            raise exceptions.ValidationError('A company with that id do not exists.')
+            raise exceptions.ValidationError('A company with that id does not exists.')
 
         reviewer = User.objects.get(username=self.kwargs['username'])
 

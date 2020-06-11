@@ -54,7 +54,7 @@ $ curl -X GET http://127.0.0.1:8000/api/companies/
 
 `GET /api/companies/{id}/`
 
-To retrieving a company object, do a GET request to it's endpoint. Each company has an `id` field which should be passed on request. In the following example the `id` is `1`:
+To retrieve a company object, do a GET request to it's endpoint. Each company has an `id` field which should be passed on request. In the following example the `id` is `1`:
 
 ```console
 $ curl -X GET http://127.0.0.1:8000/api/companies/1/
@@ -99,7 +99,7 @@ $ curl -X GET http://127.0.0.1:8000/api/users/
 
 `POST /api/users/`
 
-To creating a new user you will need to send a `JSON` payload with the user's `username` like the example below:
+To create a new user you will need to send a `JSON` payload with the user's `username` like the example below:
 
 ```console
 $ curl -X POST http://127.0.0.1:8000/api/users/ \
@@ -195,7 +195,7 @@ $ curl -X GET http://127.0.0.1:8000/api/users/mary/reviews/ \
 
 `POST /api/users/{username}/reviews/`
 
-To creating a user's review you will need to send a `JSON` payload with the following fields: `company_id`, `title`, `summary` and `rating` as shown below:
+To create a user's review you will need to send a `JSON` payload with the following fields: `company_id`, `title`, `summary` and `rating` as shown below:
 
 ```console
 $ curl -X POST http://127.0.0.1:8000/api/users/mary/reviews/ \
